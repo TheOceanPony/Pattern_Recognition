@@ -5,4 +5,4 @@ install:
   - pip3 install -r requirements.txt
 
 before_script: cd Bayesian/First
-script: python -m  doctest -v  First.py
+script: python -m  doctest -v  FirstModule.py
