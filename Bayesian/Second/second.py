@@ -1,6 +1,6 @@
 import asyncio
 import websockets
-import SecondModule as sm
+import second_module as sm
 
 SessionID = "Coo1Hazcker3011"
 
