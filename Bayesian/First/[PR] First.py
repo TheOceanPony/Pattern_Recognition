@@ -56,7 +56,7 @@ async def first():
                 a = u.compare(x, dictionary[k], noise)
                 probs.append(a)
 
-            answer = u.max_index((probs))       # FIXME
+            answer = u.max_index((probs))
             # print(f"<{u.maxInd(probs)}> \n {probs}")
 
             await websocket.send(f"{step + 1} {answer}")
