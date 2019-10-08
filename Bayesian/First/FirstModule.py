@@ -11,6 +11,12 @@ def parse_even(arr, index=0):
 
 
 def parse_odd(arr, index=0):
+    """
+    >>> parse_odd([1,0,1,0,1,0,1,0,1,0])
+    [0, 0, 0, 0, 0]
+    >>> parse_odd([0,1,0,1,0,1,0,1,0,1])
+    [1, 1, 1, 1, 1]
+    """
     result = []
     for i in range(index, len(arr)):
         if i % 2 != 0:
@@ -31,6 +37,14 @@ def glossary(arr, symbols_amount, length):
 
 
 def max_index(arr):
+    """
+    >>> max_index([1 ,2, 10, 4, 5, 2])
+    2
+    >>> max_index([1 ,2, -13, 4, 5,-6])
+    4
+    >>> max_index([4, 4, 4, -4, 1])
+    0
+    """
     maximum = arr[0]
     max_ind = 0
     for i in range(1, len(arr)):
