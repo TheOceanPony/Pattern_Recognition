@@ -1,8 +1,8 @@
 language: python
 python:
-  - "3.7"
+  - "3.7.4"
 install:
-  - pip install -r requirements.txt
+  - pip3 install -r requirements.txt
 
-script:
-  - Bayesian/First/First.py
+before_script: cd Bayesian/First
+script: python -m  doctest -v  First.py
