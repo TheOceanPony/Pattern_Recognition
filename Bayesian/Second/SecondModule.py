@@ -33,7 +33,7 @@ def predict_delta(_heatmap, _delta):
     answer = maxInd(temp) + _delta
     return answer
 
-# TODO find a replacement to this...nonsense
+# TODO a replacement to this...nonsense
 def Isum(_arr,  _start=0, _end=-1):
     if _start > _end:
         return f"Error: _end: {_end} is less that _start: {_start}";
@@ -45,7 +45,7 @@ def Isum(_arr,  _start=0, _end=-1):
 
 def maxInd(_arr):
     maximum = _arr[0]
-    max_index = 0
+    max_ind = 0
     for i in range(1, len(_arr)):
         if maximum < _arr[i]:
             maximum = _arr[i]
