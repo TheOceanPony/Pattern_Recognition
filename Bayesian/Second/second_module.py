@@ -26,7 +26,7 @@ def predict_L1(_heatmap):
         if total >= 0.5:
             return i-1
         total += _heatmap[i]
-    return "!ERROR! - bad heatmap"
+    raise Exception("Bad arguments")
 
 
 def predict_delta(_heatmap, _delta):

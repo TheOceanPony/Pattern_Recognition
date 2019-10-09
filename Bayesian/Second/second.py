@@ -50,6 +50,4 @@ async def second():
 		response = await websocket.recv()
 		print(f"\n{request} \n-={response}")
 
-		input("--==Press any key==--")
-
 asyncio.get_event_loop().run_until_complete(second())

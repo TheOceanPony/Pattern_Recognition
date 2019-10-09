@@ -67,6 +67,4 @@ async def first():
         response = await websocket.recv()
         print(f"\n>Request: Bye \n<Response: {response}")
 
-        input("Press Enter to end...")
-
 asyncio.get_event_loop().run_until_complete(first())
