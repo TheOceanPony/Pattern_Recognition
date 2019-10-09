@@ -7,7 +7,7 @@ SessionID = "Coo1Hazcker2012"
 hScale = 20
 vScale = 20
 noise = 0.4
-totalSteps = 100
+totalSteps = 20
 shuffle = "on"  # "on" / "off"
 
 
