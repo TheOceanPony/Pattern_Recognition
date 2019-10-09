@@ -1,13 +1,15 @@
 import asyncio
 import websockets
+import math
 import second_module as sm
 
 SessionID = "Coo1Hazcker3011"
 
 width = 100 	# int[2, 1000]
-loss = "L1"		# L1 or int[0, width)
+loss = "51"		# L1 or int[0, width/2 - 1)
 totalSteps = 10		# int[1, 1 000 000]
-repeats = 2		# int[1, 1000]
+repeats = 1		# int[1, 1000]
+
 
 async def second():
 	url = "wss://sprs.herokuapp.com/second/" + SessionID
@@ -29,12 +31,14 @@ async def second():
 
 			heatmap = sm.normalise(sm.parse(response))
 
-			if loss == "L1":
+			if int(loss) >= width/2:
+				answer = math.floor(width / 2)
+			elif loss == "L1":
 				answer = str(sm.predict_L1(heatmap))
 			else:
 				answer = str(sm.predict_delta(heatmap, int(loss)))
 
-			a = answer + " "
+			a = str(answer) + " "
 
 			request = f"{step}\n{a*(repeats-1)}{answer}"
 			await websocket.send(request)
