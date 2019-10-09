@@ -56,10 +56,17 @@ def max_index(arr):
 
 def compare(arr_x, arr_y, p):
     if len(arr_x) != len(arr_y):
-        return -404
-    prod = 0
-    for i  in range(0, len(arr_x) ):
-        prod += (arr_x[i] != arr_y[i])*math.log(p) + (1 != (arr_x[i] != arr_y[i]))*math.log(1 - p)
+        raise Exception("Bad arguments")
+    if (p == 1) or (p == 0):
+        prod = 1
+    else:
+        prod = 0
+
+    for i in range(0, len(arr_x) ):
+        if (p == 1) or (p == 0):
+            prod *= p**(arr_x[i] != arr_y[i]) * (1 - p)**(1 != (arr_x[i] != arr_y[i]))
+        else:
+            prod += (arr_x[i] != arr_y[i])*math.log(p) + (1 != (arr_x[i] != arr_y[i]))*math.log(1 - p)
     return prod
 
 
