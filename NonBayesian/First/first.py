@@ -87,4 +87,5 @@ def square_risk(k, histogram):
 
 k = np.array([10, 20, 30, 40, 50])
 histogram = np.array([0.1, 0.4, 0.2, 0.1, 0.2])
-# binary_risk(k, histogram)[binary_penalty(k, histogram, binary_strategy(k, histogram)[0]), binary_penalty(k, histogram, square_strategy(k, histogram)[0])]
+# Is this right?
+binary_risk(k, histogram)[binary_penalty(k, histogram, binary_strategy(k, histogram)[0]), binary_penalty(k, histogram, square_strategy(k, histogram)[0])]
