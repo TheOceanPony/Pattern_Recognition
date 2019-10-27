@@ -62,33 +62,45 @@ def nonbayesian_strategy(k, histogram, alpha):
         if a < minimum:
             minimum = a
             res = j
-    return k[res]
+    return [res,k[res]]
 
 
-def binary_risk(k, histogram):
-    risk1 = 0
-    risk2 = 0
-    for j in range(0, 10 ** 4):
-        k0 = generator(k, 1, p=histogram)[0]
-        risk1 += int((binary_strategy(k, histogram)[1]) != k0)
-        risk2 += int((square_strategy(k, histogram))[1] != k0)
-    return [risk1 / (10 ** 4), risk2 / (10 ** 4)]
+def binary_risk(k):
+  risk=np.array([0, 0, 0])
+  res=np.array([0, 0, 0])
+  for i in range (0, 10**4):
+    histogram=random_histogram(len(k))
+    k0=generator(k, 10**4, p=histogram)
+    res[0]=binary_strategy(k, histogram)[1]
+    res[1]=square_strategy(k, histogram)[1]
+    res[2]=nonbayesian_strategy(k, histogram,10000)[1]
+    for j in range(0, 10**4):
+      risk[0]+=int(res[0]!=k0[j])
+      risk[1]+=int(res[1]!=k0[j])
+      risk[2]+=int(res[2]!=k0[j])
+    risk=risk/(10**4)
+  return (risk/(10**4))
 
-
-def square_risk(k, histogram):
-    risk1 = 0
-    risk2 = 0
-    for j in range(0, (10 ** 4)):
-        k0 = generator(k, 1, p=histogram)[0]
-        risk1 += ((square_strategy(k, histogram)[1] - k0) ** 2)
-        risk2 += ((binary_strategy(k, histogram)[1] - k0) ** 2)
-
-    return [risk1 / (10 ** 4), risk2 / (10 ** 4)]
+def square_risk(k):
+  risk=np.array([0, 0, 0])
+  res=np.array([0, 0, 0])
+  for i in range (0, 10**4):
+    histogram=random_histogram(len(k))
+    k0=generator(k, 10**4, p=histogram)
+    res[0]=square_strategy(k, histogram)[1]
+    res[1]=binary_strategy(k, histogram)[1]
+    res[2]=nonbayesian_strategy(k, histogram,1000)[1]
+    for j in range(0, 10**4):
+      risk[0]+=((res[0]-k0[j])**2)
+      risk[1]+=((res[1]-k0[j])**2)
+      risk[2]+=((res[2]-k0[j])**2)
+    risk=risk/(10**4)
+  return (risk/(10**4))
 
 
 k = np.array([10, 20, 30, 40, 50])
 histogram = np.array([0.1, 0.4, 0.2, 0.1, 0.2])
 
-print(f"binary risk {binary_risk(k, histogram)}")
+print(f"binary risk {binary_risk(k)}")
 print(f"binary_penalty {[binary_penalty(k, histogram, binary_strategy(k, histogram)[0]), binary_penalty(k, histogram, square_strategy(k, histogram)[0])]}")
 
