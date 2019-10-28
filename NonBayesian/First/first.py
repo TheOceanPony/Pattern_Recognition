@@ -65,38 +65,48 @@ def nonbayesian_strategy(k, histogram, alpha):
     return [res,k[res]]
 
 
-def binary_risk(k):
-  risk=np.array([0, 0, 0])
-  res=np.array([0, 0, 0])
+def binary_risk(k, q, alpha=None):
+  risk=0
+  res=0
   for i in range (0, 10**4):
     histogram=random_histogram(len(k))
     k0=generator(k, 10**4, p=histogram)
-    res[0]=binary_strategy(k, histogram)[1]
-    res[1]=square_strategy(k, histogram)[1]
-    res[2]=nonbayesian_strategy(k, histogram,10000)[1]
+    if(alpha is None):
+      res=(q(k,histogram)[1])
+    else:
+      res=(q(k,histogram, alpha)[1])
     for j in range(0, 10**4):
-      risk[0]+=int(res[0]!=k0[j])
-      risk[1]+=int(res[1]!=k0[j])
-      risk[2]+=int(res[2]!=k0[j])
+      risk+=int(res!=k0[j])
     risk=risk/(10**4)
   return (risk/(10**4))
 
-def square_risk(k):
-  risk=np.array([0, 0, 0])
-  res=np.array([0, 0, 0])
+def square_risk(k, q, alpha=None):
+  risk=0
+  res=0
   for i in range (0, 10**4):
     histogram=random_histogram(len(k))
     k0=generator(k, 10**4, p=histogram)
-    res[0]=square_strategy(k, histogram)[1]
-    res[1]=binary_strategy(k, histogram)[1]
-    res[2]=nonbayesian_strategy(k, histogram,1000)[1]
+    if(alpha is None):
+      res=(q(k,histogram)[1])
+    else:
+      res=(q(k,histogram, alpha)[1])
     for j in range(0, 10**4):
-      risk[0]+=((res[0]-k0[j])**2)
-      risk[1]+=((res[1]-k0[j])**2)
-      risk[2]+=((res[2]-k0[j])**2)
+      risk+=((res-k0[j])**2)
     risk=risk/(10**4)
   return (risk/(10**4))
 
+def conditional_risk(k, q, histogram, alpha=None):
+  risk=np.array([0,0])
+  res=0
+  k0=generator(k, 10**5, p=histogram)
+  if(alpha is None):
+      res=(q(k,histogram)[1])
+  else:
+      res=(q(k,histogram, alpha)[1])
+  for j in range(0, 10**5):
+    risk[0]+=((res-k0[j])**2)
+    risk[1]+=int(res!=k0[j])
+  return (risk/(10**5))
 
 k = np.array([10, 20, 30, 40, 50])
 histogram = np.array([0.1, 0.4, 0.2, 0.1, 0.2])
