@@ -52,7 +52,7 @@ def cache(arr):
         raise Exception("Bad dimension")
 
 
-def cumsum(arr, cache_arr, start_point, end_point):
+def cumsum_cached(arr, cache_arr, start_point, end_point):
     if arr.ndim == 1:
         return cache_arr[end_point] - cache_arr[start_point-1]
 
@@ -73,5 +73,28 @@ def cumsum(arr, cache_arr, start_point, end_point):
                + cache_arr[start_point[0], end_point[1], start_point[2]] \
                + cache_arr[start_point[0], start_point[1], end_point[2]] \
                - cache_arr[start_point[0], start_point[1], start_point[2]]
+    else:
+        raise Exception("Bad dimension")
+
+def cumsum_slow(arr, start_point, end_point):
+    result = 0
+
+    if arr.ndim == 1:
+        for i in range(start_point[0], end_point[0]+1):
+            result = result + arr[i]
+        return result
+
+    if arr.ndim == 2:
+        for i in range(start_point[0], end_point[0]+1):
+            for j in range(start_point[1], end_point[1]+1):
+                result = result + arr[i, j]
+        return result
+
+    if arr.ndim == 3:
+        for i in range(start_point[0], end_point[0]+1):
+            for j in range(start_point[1], end_point[1]+1):
+                for k in range(start_point[2], end_point[2]+1):
+                    result = result + arr[i, j, k]
+        return result
     else:
         raise Exception("Bad dimension")
