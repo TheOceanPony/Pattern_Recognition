@@ -2,22 +2,25 @@ import numpy as np
 import second_module as I
 
 """
-B = np.ones((5, 5))
-B = np.random.randint(10, size=20)
-B = np.random.randint(10, size=(10, 10))
-B = np.array([1, 2, 3, 4, 5, 6])
-B = np.array([[10, 10, 10, 10, 10, 10],
-              [10, 1, 1, 1, 1, 10],
-              [10, 1, 1, 1, 1, 10],
-              [10, 10, 10, 10, 10, 10]])
+1
+A = np.ones(10)
+start_point = 0
+end_point = 3
+
+2
+A = np.ones((5, 5))
+start_point = [1, 1]
+end_point = [3, 3]  
+
+3
+A = np.ones((3, 3, 3))
+start_point = [1, 1, 1]
+end_point = [3, 3, 3]  
 """
+A = np.ones((3, 3, 3))
+start_point = [1, 1, 1]
+end_point = [1, 1, 1]
 
-B = np.zeros((5, 5))
-start_point = (1, 1)
-end_point = (3, 5)
-
-print(B)
-cache_arr = I.cache(B)
-print(cache_arr)
-print(I.cum_sum(B, cache_arr, (4, 4), (3, 3) ))
-print(I.num_sum(B, (4, 4), (3, 3) ))
+cache_arr = I.srnd_with_zeros(I.cache(A))
+print(f"A\n{A} \n\nCache\n{cache_arr}")
+print(f"cumsum: {I.cumsum(A, cache_arr, start_point, end_point)}")
