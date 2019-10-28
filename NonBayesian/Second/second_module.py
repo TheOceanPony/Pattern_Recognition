@@ -76,6 +76,7 @@ def cumsum_cached(arr, cache_arr, start_point, end_point):
     else:
         raise Exception("Bad dimension")
 
+
 def cumsum_slow(arr, start_point, end_point):
     result = 0
 
