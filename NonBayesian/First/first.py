@@ -111,6 +111,15 @@ def conditional_risk(k, q, histogram, alpha=None):
 k = np.array([10, 20, 30, 40, 50])
 histogram = np.array([0.1, 0.4, 0.2, 0.1, 0.2])
 
-print(f"binary risk {binary_risk(k)}")
-print(f"binary_penalty {[binary_penalty(k, histogram, binary_strategy(k, histogram)[0]), binary_penalty(k, histogram, square_strategy(k, histogram)[0])]}")
+cond_bin = []
+cond_nb = []
+a = []
+for alfa in range(0, 10**4, 200):
+  a.append(alfa)
+  cond_bin.append(conditional_risk(k, binary_strategy, histogram, None)[1] )
+  cond_nb.append(conditional_risk(k, nonbayesian_strategy, histogram, alfa)[1] )
 
+plt.plot(a, cond_bin, 'r--', a, cond_nb, 'b--')
+plt.xlabel('alfa')
+plt.ylabel('binary (red) & nonbayesian (blue)')
+plt.show()
