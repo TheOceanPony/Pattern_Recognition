@@ -52,9 +52,42 @@ def cache(arr):
         raise Exception("Bad dimension")
 
 
+def cache2(arr):
+    if arr.ndim == 1:
+        n = np.shape(arr)[0]
+        cache_arr = np.zeros(n + 2)
+        for i in range(1, n + 1):
+            cache_arr[i] = cache_arr[i-1] + arr[i-1]
+        return cache_arr
+    if arr.ndim == 2:
+        n = np.shape(arr)[0]
+        m = np.shape(arr)[1]
+        cache_arr = np.zeros((n + 2, m + 2))
+        for i in range(1, n + 1):
+            for j in range(1, m + 1):
+                cache_arr[i, j] = cache_arr[i, j - 1] + cache_arr[i - 1, j] - cache_arr[i - 1, j - 1] + arr[i - 1, j - 1]
+        return cache_arr
+
+    if arr.ndim == 3:
+        n = np.shape(arr)[0]
+        m = np.shape(arr)[1]
+        k = np.shape(arr)[2]
+        cache_arr = np.zeros((n + 2, m + 2, k + 2))
+        for i in range(1, n + 1):
+            for j in range(1, m + 1):
+                for k in range(1, k + 1):
+                    cache_arr[i, j, k] = cache_arr[i-1, j ,k] + cache_arr[i, j-1, k] + cache_arr[i, j, k-1] \
+                                         - cache_arr[i, j-1, k-1] - cache_arr[i-1, j, k-1] - cache_arr[i-1, j-1, k]\
+                                         + cache_arr[i-1, j-1, k-1] + arr[i-1, j-1, k-1]
+        return cache_arr
+        return 0
+    else:
+        raise Exception("Bad dimension")
+
+
 def cumsum_cached(arr, cache_arr, start_point, end_point):
     if arr.ndim == 1:
-        return cache_arr[end_point] - cache_arr[start_point-1]
+        return cache_arr[end_point[0]] - cache_arr[start_point[0]-1]
 
     if arr.ndim == 2:
         start_point = start_point - np.array([1, 1])

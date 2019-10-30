@@ -80,6 +80,7 @@ def binary_risk(k, q, alpha=None):
     risk=risk/(10**4)
   return (risk/(10**4))
 
+
 def square_risk(k, q, alpha=None):
   risk=0
   res=0
@@ -95,6 +96,7 @@ def square_risk(k, q, alpha=None):
     risk=risk/(10**4)
   return (risk/(10**4))
 
+
 def conditional_risk(k, q, histogram, alpha=None):
   risk=np.array([0,0])
   res=0
@@ -106,7 +108,7 @@ def conditional_risk(k, q, histogram, alpha=None):
   for j in range(0, 10**5):
     risk[0]+=((res-k0[j])**2)
     risk[1]+=int(res!=k0[j])
-  return (risk/(10**5))
+  return risk/(10**5)
 
 k = np.array([10, 20, 30, 40, 50])
 histogram = np.array([0.1, 0.4, 0.2, 0.1, 0.2])
