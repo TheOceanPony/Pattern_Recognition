@@ -96,12 +96,11 @@ def binary_risk(k, q, alpha=None):
     histogram=random_histogram(len(k))
     k0=generator(k, 10**4, p=histogram)
     if(alpha is None):
-      res=(q(k,histogram)[1])
+      res=(q(k,histogram)[0])
     else:
-      res=(q(k,histogram, alpha)[1])
-    for j in range(0, 10**4):
-      risk+=int(res!=k0[j])
-    risk=risk/(10**4)
+      res=(q(k,histogram, alpha)[0])
+    risk+=binary_penalty(k, histogram, res)
+    # risk/(10**4)
   return (risk/(10**4))
 
 def square_risk(k, q, alpha=None):
@@ -111,13 +110,13 @@ def square_risk(k, q, alpha=None):
     histogram=random_histogram(len(k))
     k0=generator(k, 10**4, p=histogram)
     if(alpha is None):
-      res=(q(k,histogram)[1])
+      res=(q(k,histogram)[0])
     else:
-      res=(q(k,histogram, alpha)[1])
-    for j in range(0, 10**4):
-      risk+=((res-k0[j])**2)
-    risk=risk/(10**4)
+      res=(q(k,histogram, alpha)[0])
+    risk+=square_penalty(k, histogram, res)
+    # risk=risk/(10**4)
   return (risk/(10**4))
+
 
 def conditional_risk(k, q, histogram, alpha=None):
   risk=np.array([0,0])
