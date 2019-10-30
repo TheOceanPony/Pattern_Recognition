@@ -4,5 +4,5 @@ python:
 install:
   - pip3 install -r requirements.txt
 
-before_script: cd Bayesian/First
-script: python -m  doctest -v  FirstModule.py
+before_script: cd NonBayesian/Second
+script: python -m  doctest -v  second2.py
