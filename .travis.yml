@@ -4,5 +4,5 @@ python:
 install:
   - pip3 install -r requirements.txt
 
-before_script: cd NonBayesian/Second
+before_script: cd Markov_chain
 script: python -m  doctest -v  second2.py
