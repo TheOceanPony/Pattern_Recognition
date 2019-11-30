@@ -47,6 +47,13 @@ def generator(n, y, histogram):
 
 
 def upscale(y, scale):
+    """
+       >>> upscale([1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1], 2)
+       array([1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0,
+              1, 1, 1, 1, 1, 1, 1, 1])
+       >>> upscale([2], 20)
+       array([2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2])
+    """
     res = []
     for i in range(0, len(y)):
         for j in range(0, scale):
@@ -73,10 +80,21 @@ def argmax(arr):
 
 
 def invert(arr):
+    """
+    invert(np.array([1, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 0]))
+    array([0, 0, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 1])
+
+    """
     return 1 - arr
 
 
 def find(x, y):
+    """
+    find(np.array([2]),np.array([3,1,2,4,3,7]))
+    2
+    find(np.array([1]),np.array([1,1,1,1,1,1,1]))
+    0
+    """
     for i in range(0, len(y)):
         if (x == y[i]).all():
             return i
@@ -154,4 +172,3 @@ y = [
      0, 0, 1,
      0, 0, 1],
 ]
-
