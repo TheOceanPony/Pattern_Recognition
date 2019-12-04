@@ -6,4 +6,4 @@ install:
 
 script: python -m  doctest -v  Bayesian/second_module.py
 script: python -m  doctest -v  NonBayesian/First/first.py
-script: python -m  doctest -v  Markov chain/functions.py
+script: python -m  doctest -v  Markov_chain/functions.py
