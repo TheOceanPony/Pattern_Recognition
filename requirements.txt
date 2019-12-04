@@ -1,2 +1,4 @@
 asyncio==3.4.3
 websockets==8.0.2
+numpy
+matplotlib
