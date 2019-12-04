@@ -99,6 +99,15 @@ def find(x, y):
         if (x == y[i]).all():
             return i
 
+def check(res):
+    a=0
+    b=0
+    for i in range(len(res)):
+        if(i%3==0):
+            a+=res[i]
+        else:
+            b+=res[i]
+    return (a>b)
 
 def sum_xor(a, b):
     return np.sum(xor(a, b))
