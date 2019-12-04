@@ -18,10 +18,9 @@ for i in range(0, REPEATS):
     k = generator(NUMBER_LENGTH, y, HISTOGRAM)
     x = noised(k[0], NOISE)
     res = recursive_strategy(x, HISTOGRAM, y, NUMBER_LENGTH, NOISE)
-
-    if argmax(res) == k[1]:
+    if int(check(res)) == int(not(bool(k[1]%3))):
         j += 1
-
+        print(j)
     print(f"{i} | {k[2]} | {argmax(res)%3 == 0}")
 
 end = time.time()
